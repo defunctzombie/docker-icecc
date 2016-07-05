@@ -1,0 +1,13 @@
+version: '2'
+services:
+    scheduler:
+        build: .
+        ports:
+            - 8765:8765
+        command: /usr/sbin/icecc-scheduler -vvv
+
+    worker1:
+        build: .
+        links:
+            - scheduler
+        command: /usr/sbin/iceccd -s scheduler -vvv
